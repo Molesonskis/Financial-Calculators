@@ -121,7 +121,6 @@ with col1:
     list = []
 
     for period in per1:
-        print(period)
         val = npf.fv(
             rate=i1,
             nper=period,
@@ -210,7 +209,6 @@ with col2:
     list = []
 
     for period in per2:
-        print(period)
         val = npf.fv(
             rate=i2,
             nper=period,
