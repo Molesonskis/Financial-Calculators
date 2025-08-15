@@ -60,7 +60,7 @@ with col1:
         min_value=0.01,
         max_value=100.00,
         step=0.01,
-        value=4.00,
+        value=4.01,
         key="i1"
     ) / 100 / 12
 
@@ -123,7 +123,7 @@ with col2:
         min_value=0.01,
         max_value=100.00,
         step=0.01,
-        value=4.03,
+        value=4.02,
         key="i2"
     ) / 100 / 12
 
@@ -131,7 +131,7 @@ with col2:
         "Upfront fees (£)",
         min_value=0.00,
         step=1.00,
-        value=100.00,
+        value=934.00,
         key="f2"
     )
 
