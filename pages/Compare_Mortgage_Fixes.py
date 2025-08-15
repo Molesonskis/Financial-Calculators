@@ -1,6 +1,8 @@
 import streamlit as st
 import numpy as np
 import numpy_financial as npf
+import pandas as pd
+import plotly.express as px
 
 st.set_page_config(
     page_title="Compare Mortgage Fixes",
@@ -116,6 +118,22 @@ with col1:
         when=1,
     )
 
+    list = []
+
+    for period in per1:
+        print(period)
+        val = npf.fv(
+            rate=i1,
+            nper=period,
+            pmt=payment1,
+            pv=-p2,
+            when=1,
+        )
+        
+        list.append({"Months out": period, "Principal_m1": val})
+
+    df1 = pd.DataFrame(list)
+
     st.write(f"Interest paid in {fix} year fix period: £{round(interest1,2)}")
 
     c1 = interest1 + f1
@@ -189,16 +207,49 @@ with col2:
         when=1,
     )
 
+    list = []
+
+    for period in per2:
+        print(period)
+        val = npf.fv(
+            rate=i2,
+            nper=period,
+            pmt=payment2,
+            pv=-p2,
+            when=1,
+        )
+        
+        list.append({"Months out": period, "Principal_m2": val})
+
+    df2 = pd.DataFrame(list)
+
     st.write(f"Interest paid in {fix} year fix period: £{round(interest2,2)}")
 
     c2 = interest2 + f2
 
     st.write(f"Total 'cost' over the {fix} year period: £{round(c2,2)}")
 
-    st.write(f"Principal remaining at end of fix: £{round(val1,2)}")
+    st.write(f"Principal remaining at end of fix: £{round(val2,2)}")
 
 diff = round(abs(c1 - c2),2)
 if c1 > c2:
     st.write(f"Mortgage 2 is cheaper than Mortgage 1 by £{diff}")
 elif c1 < c2:
     st.write(f"Mortgage 1 is cheaper than Mortgage 2 by £{diff}")
+
+# df = df1.merge(
+#     df2,
+#     how="left",
+#     on="Months out"
+# )
+
+# st.dataframe(df)
+
+# fig = px.line(
+#     df,
+#     x="Months out",
+#     y=["Principal_m1", "Principal_m2"],
+#     range_y=[0, p1]
+# )
+
+# st.plotly_chart(fig)
