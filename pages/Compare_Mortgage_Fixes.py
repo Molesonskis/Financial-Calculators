@@ -7,6 +7,13 @@ st.set_page_config(
     page_icon="🔎",
 )
 
+st.markdown("#### Compare Mortgage Fixes")
+
+st.markdown("Use this tool to compare two different mortgage fixes based on their interest rate and fees." \
+" This is best used if all parameters of the mortgage are the same other than interest rates and upfront fees.")
+
+st.divider
+
 with st.sidebar:
     with st.expander("Settings"):
         same_principal = st.checkbox(
