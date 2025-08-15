@@ -108,11 +108,21 @@ with col1:
     )
     interest1 = np.sum(ipmt1)
 
+    val1 = npf.fv(
+        rate=i1,
+        nper=fix*12,
+        pmt=payment1,
+        pv=-p1,
+        when=1,
+    )
+
     st.write(f"Interest paid in {fix} year fix period: £{round(interest1,2)}")
 
     c1 = interest1 + f1
 
     st.write(f"Total 'cost' over the {fix} year period: £{round(c1,2)}")
+
+    st.write(f"Principal remaining at end of fix: £{round(val1,2)}")
 
 with col2:
     st.write("Mortgage 2")
@@ -171,11 +181,21 @@ with col2:
     )
     interest2 = np.sum(ipmt2)
 
+    val2 = npf.fv(
+        rate=i2,
+        nper=fix*12,
+        pmt=payment2,
+        pv=-p2,
+        when=1,
+    )
+
     st.write(f"Interest paid in {fix} year fix period: £{round(interest2,2)}")
 
     c2 = interest2 + f2
 
     st.write(f"Total 'cost' over the {fix} year period: £{round(c2,2)}")
+
+    st.write(f"Principal remaining at end of fix: £{round(val1,2)}")
 
 diff = round(abs(c1 - c2),2)
 if c1 > c2:
