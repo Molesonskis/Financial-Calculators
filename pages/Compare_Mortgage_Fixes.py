@@ -16,30 +16,13 @@ st.markdown("Use this tool to compare two different mortgage fixes based on thei
 
 st.divider()
 
-with st.sidebar:
-    with st.expander("Settings"):
-        same_principal = st.checkbox(
-            "Use same principal for both mortgages?",
-            True,
-        )
-        # assume_interest_forever = st.checkbox(
-        #     "Assume the interest rate stays after the fixed period?",
-        #     True,
-        # )
-        # assume_no_overpayments = st.checkbox(
-        #     "Assume there are no overpayments?",
-        #     True
-        # )
-
-if same_principal:
-    p1 = st.number_input(
+principal = st.number_input(
         "Mortgage principal (£)",
         min_value=1000,
         max_value=None,
         value=255000,
         step=1000,
-    )
-    p2 = p1
+)
 
 fix = st.number_input(
     "Enter the fix period (years)",
@@ -65,14 +48,6 @@ col1, col2 = st.columns(2,
 with col1:
     st.write("Mortgage 1")
 
-    if not same_principal:
-        p1 = st.number_input(
-            "Enter mortgage 1's principal (£)",
-            min_value=None,
-            max_value=None,
-            key="p1",
-        )
-
     i1 = st.number_input(
         "Interest rate (%)",
         min_value=0.01,
@@ -93,7 +68,7 @@ with col1:
     payment1 = npf.pmt(
         rate=i1,
         nper=length,
-        pv=-p1,
+        pv=-principal,
         fv=0,
         when=1
     )
@@ -104,7 +79,7 @@ with col1:
         rate=i1,
         per=per1,
         nper=length,
-        pv=-p1,
+        pv=-principal,
         fv=0,
         when=1,
     )
@@ -114,7 +89,7 @@ with col1:
         rate=i1,
         nper=fix*12,
         pmt=payment1,
-        pv=-p1,
+        pv=-principal,
         when=1,
     )
 
@@ -125,7 +100,7 @@ with col1:
             rate=i1,
             nper=period,
             pmt=payment1,
-            pv=-p2,
+            pv=-principal,
             when=1,
         )
         
@@ -143,14 +118,6 @@ with col1:
 
 with col2:
     st.write("Mortgage 2")
-
-    if not same_principal:
-        p2 = st.number_input(
-            "Enter mortgage 2's principal (£)",
-            min_value=None,
-            max_value=None,
-            key="p2"
-        )
 
     i2 = st.number_input(
         "Interest rate (%)",
@@ -172,7 +139,7 @@ with col2:
     payment2 = npf.pmt(
         rate=i2,
         nper=length,
-        pv=-p2,
+        pv=-principal,
         fv=0,
         when=1
     )
@@ -183,7 +150,7 @@ with col2:
         rate=i2,
         per=per2,
         nper=length,
-        pv=-p2,
+        pv=-principal,
         fv=0,
         when=1,
     )
@@ -193,7 +160,7 @@ with col2:
         rate=i2,
         nper=fix*12,
         pmt=payment2,
-        pv=-p2,
+        pv=-principal,
         when=1,
     )
 
@@ -204,7 +171,7 @@ with col2:
             rate=i2,
             nper=period,
             pmt=payment2,
-            pv=-p2,
+            pv=-principal,
             when=1,
         )
         
@@ -238,7 +205,7 @@ elif c1 < c2:
 #     df,
 #     x="Months out",
 #     y=["Principal_m1", "Principal_m2"],
-#     range_y=[0, p1]
+#     range_y=[0, principal]
 # )
 
 # st.plotly_chart(fig)
