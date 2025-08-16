@@ -48,7 +48,16 @@ fix = st.number_input(
     value=5,
     step=1,
     key="fix",
-)                  
+)      
+
+length = st.number_input(
+    "Length (years)",
+    min_value=1,
+    max_value=40,
+    step=1,
+    value=25,
+    key="length",
+) * 12
 
 col1, col2 = st.columns(2,
                         border=True)
@@ -81,18 +90,9 @@ with col1:
         key="f1"
     )
 
-    l1 = st.number_input(
-        "Length (years)",
-        min_value=1,
-        max_value=40,
-        step=1,
-        value=25,
-        key="l1",
-    ) * 12
-
     payment1 = npf.pmt(
         rate=i1,
-        nper=l1,
+        nper=length,
         pv=-p1,
         fv=0,
         when=1
@@ -103,7 +103,7 @@ with col1:
     ipmt1 = npf.ipmt(
         rate=i1,
         per=per1,
-        nper=l1,
+        nper=length,
         pv=-p1,
         fv=0,
         when=1,
@@ -169,18 +169,9 @@ with col2:
         key="f2"
     )
 
-    l2 = st.number_input(
-        "Length (years)",
-        min_value=1,
-        max_value=40,
-        step=1,
-        value=25,
-        key="l2",
-    ) * 12
-
     payment2 = npf.pmt(
         rate=i2,
-        nper=l2,
+        nper=length,
         pv=-p2,
         fv=0,
         when=1
@@ -191,7 +182,7 @@ with col2:
     ipmt2 = npf.ipmt(
         rate=i2,
         per=per2,
-        nper=l2,
+        nper=length,
         pv=-p2,
         fv=0,
         when=1,
