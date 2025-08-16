@@ -21,15 +21,15 @@ with st.sidebar:
         same_principal = st.checkbox(
             "Use same principal for both mortgages?",
             True,
-            )
-        assume_interest_forever = st.checkbox(
-            "Assume the interest rate stays after the fixed period?",
-            True,
         )
-        assume_no_overpayments = st.checkbox(
-            "Assume there are no overpayments?",
-            True
-        )
+        # assume_interest_forever = st.checkbox(
+        #     "Assume the interest rate stays after the fixed period?",
+        #     True,
+        # )
+        # assume_no_overpayments = st.checkbox(
+        #     "Assume there are no overpayments?",
+        #     True
+        # )
 
 if same_principal:
     p1 = st.number_input(
